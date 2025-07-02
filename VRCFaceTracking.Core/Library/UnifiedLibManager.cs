@@ -175,6 +175,8 @@ public class UnifiedLibManager : ILibManager
             _logger.LogDebug("Starting thread for {module}", module.GetType().Name);
             while (!cts.IsCancellationRequested)
             {
+                ParameterStorageCollector.ModuleStartedUpdate();
+                
                 module.Update();
                 
                 ParameterStorageCollector.ModuleEndedUpdate();
