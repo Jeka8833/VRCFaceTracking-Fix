@@ -1,4 +1,5 @@
-﻿using VRCFaceTracking.Core.Params;
+﻿using VRCFaceTracking.Core;
+using VRCFaceTracking.Core.Params;
 using VRCFaceTracking.Core.Params.Data;
 using VRCFaceTracking.Core.Params.Expressions;
 using VRCFaceTracking.Core.Params.Expressions.Legacy.Eye;
@@ -25,7 +26,13 @@ namespace VRCFaceTracking
         /// <summary>
         /// Latest Expression Data accessible and sent by all VRCFaceTracking modules.
         /// </summary>
-        public static UnifiedTrackingData Data = new();
+        public static UnifiedTrackingData Data
+        {
+            get
+            {
+                return ParameterStorageCollector.GetTrackingData();
+            }
+        }
 
         /// <summary>
         /// Container of all features and functions that mutates the incoming expression data into output data suitable for driving Unified Expressions.

@@ -176,9 +176,14 @@ public class UnifiedLibManager : ILibManager
             while (!cts.IsCancellationRequested)
             {
                 module.Update();
+                
+                ParameterStorageCollector.ModuleEndedUpdate();
             }
             _logger.LogDebug("Thread for {module} ended", module.GetType().Name);
         });
+        
+        ParameterStorageCollector.RegisterModule(module, thread);
+        
         thread.Start();
 
         var runtimeModules = new ModuleRuntimeInfo
